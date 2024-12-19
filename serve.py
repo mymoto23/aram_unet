@@ -31,8 +31,9 @@ db = client["aram"]
 collection = db["original-images"]
 
 # Load model
-model = UNet(n_channels=3, n_classes=2, bilinear=False)
-state_dict = torch.load('checkpoints/checkpoint_epoch25.pth', map_location='cuda:0')
+ckpt_path = 'checkpoints/checkpoint_epoch25.pth'
+model = UNet(n_channels=3, n_classes=1, bilinear=False)
+state_dict = torch.load(ckpt_path, map_location='cuda:0')
 del state_dict['mask_values']
 
 model.load_state_dict(state_dict)
