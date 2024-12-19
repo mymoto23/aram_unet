@@ -153,6 +153,7 @@ def train_model(
 
                         logging.info('Validation Dice score: {}'.format(val_score))
                         if enable_wandb:
+                            assert model.n_classes == 1, 'only supports binary segmentation'
                             masks_pred = F.sigmoid(masks_pred[0].detach()).squeeze(0)
                             masks_pred = (masks_pred > 0.5).float()
                             
